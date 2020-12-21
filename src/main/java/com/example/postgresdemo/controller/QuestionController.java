@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @CrossOrigin()
@@ -25,13 +24,13 @@ public class QuestionController {
 
 
     @PostMapping("/questions")
-    public Question createQuestion(@Valid @RequestBody Question question) {
+    public Question createQuestion(@RequestBody Question question) {
         return questionRepository.save(question);
     }
 
     @PutMapping("/questions/{questionId}")
     public Question updateQuestion(@PathVariable Long questionId,
-                                   @Valid @RequestBody Question questionRequest) {
+                                   @RequestBody Question questionRequest) {
         return questionRepository.findById(questionId)
                 .map(question -> {
                     question.setTitle(questionRequest.getTitle());
